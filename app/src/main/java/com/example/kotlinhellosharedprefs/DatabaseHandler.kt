@@ -18,7 +18,7 @@ class DatabaseHandler(context: Context): SQLiteOpenHelper(context,DATABASE_NAME,
     override fun onCreate(db: SQLiteDatabase?) {
         // TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
         //creating table with fields
-        val CREATE_CONTACTS_TABLE = ("CREATE TABLE " + TABLE_CONTACTS + "( id INTEGER, " + KEY_COLOR + " INTEGER, " + KEY_COUNT + " VARCHAR(10)" + ")")
+        val CREATE_CONTACTS_TABLE = ("CREATE TABLE " + TABLE_CONTACTS + "( id INTEGER, " + KEY_COLOR + " INTEGER, " + KEY_COUNT + " INTEGER" + ")")
         db?.execSQL(CREATE_CONTACTS_TABLE)
     }
 
@@ -49,12 +49,12 @@ class DatabaseHandler(context: Context): SQLiteOpenHelper(context,DATABASE_NAME,
         val db = this.readableDatabase
         val cursor = db.rawQuery(selectQuery, null)
         var color: Int
-        var count: String
+        var count: Int
         if (cursor!!.moveToFirst()) {
             do {
                 color = cursor.getInt(cursor.getColumnIndex("color"))
-                count = cursor.getString(cursor.getColumnIndex("count"))
-                data = Data(color, count)
+                count = cursor.getInt(cursor.getColumnIndex("count"))
+                data = Data(1, color, count)
             } while (cursor.moveToNext())
         }
         cursor.close()

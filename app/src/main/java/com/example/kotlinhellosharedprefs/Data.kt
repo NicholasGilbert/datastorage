@@ -1,6 +1,3 @@
 package com.example.kotlinhellosharedprefs
 
-class Data (inColor: Int, inCount: String){
-    val color = inColor
-    val count = inCount
-}
+class Data (var id: Int, var color: Int, var count: Int)
